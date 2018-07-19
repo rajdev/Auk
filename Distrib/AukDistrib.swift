@@ -658,13 +658,15 @@ final class AukPage: UIView {
   func createAndLayoutImageView(_ settings: AukSettings) -> UIImageView {
     let newImageView = AukPage.createImageView(settings)
     addSubview(newImageView)
-    AukPage.layoutImageView(newImageView, superview: self)
+    AukPage.layoutImageView(newImageView, superview: self, settings: settings)
     return newImageView
   }
   
   private static func createImageView(_ settings: AukSettings) -> UIImageView {
     let newImageView = UIImageView()
     newImageView.contentMode = settings.contentMode
+    newImageView.layer.cornerRadius = settings.cornerRadius
+    newImageView.clipsToBounds = true
     return newImageView
   }
   
@@ -675,11 +677,11 @@ final class AukPage: UIView {
   - parameter imageView: Image view that is used to create Auto Layout constraints.
   
   */
-  private static func layoutImageView(_ imageView: UIImageView, superview: UIView) {
+  private static func layoutImageView(_ imageView: UIImageView, superview: UIView, settings: AukSettings) {
     imageView.translatesAutoresizingMaskIntoConstraints = false
     
-    iiAutolayoutConstraints.fillParent(imageView, parentView: superview, margin: 0, vertically: false)
-    iiAutolayoutConstraints.fillParent(imageView, parentView: superview, margin: 0, vertically: true)
+    iiAutolayoutConstraints.fillParent(imageView, parentView: superview, margin: settings.imageViewLeftRightMargin, vertically: false)
+    iiAutolayoutConstraints.fillParent(imageView, parentView: superview, margin: settings.imageViewTopBottomMargin, vertically: true)
   }
   
   func makeAccessible(_ accessibilityLabel: String?) {
@@ -1271,6 +1273,13 @@ public struct AukSettings {
   
   /// Determines the stretching and scaling of the image when its proportion are not the same as its  container.
   public var contentMode = UIViewContentMode.scaleAspectFit
+    
+    
+  public var imageViewTopBottomMargin: CGFloat = 0.0
+    
+  public var imageViewLeftRightMargin: CGFloat = 0.0
+    
+  public var cornerRadius: CGFloat = 0.0
   
   /// Image to be displayed when remote image download fails.
   public var errorImage: UIImage?

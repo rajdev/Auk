@@ -9,6 +9,13 @@ public struct AukSettings {
   
   /// Determines the stretching and scaling of the image when its proportion are not the same as its  container.
   public var contentMode = UIViewContentMode.scaleAspectFit
+    
+    
+  public var imageViewTopBottomMargin: CGFloat = 0.0
+    
+  public var imageViewLeftRightMargin: CGFloat = 0.0
+    
+  public var cornerRadius: CGFloat = 0.0
   
   /// Image to be displayed when remote image download fails.
   public var errorImage: UIImage?

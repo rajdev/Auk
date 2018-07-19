@@ -18,6 +18,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     
     scrollView.delegate = self
     scrollView.auk.settings.placeholderImage = UIImage(named: "great_auk_placeholder.png")
+    scrollView.auk.settings.imageViewTopBottomMargin = 20.0
+    scrollView.auk.settings.imageViewLeftRightMargin = 20.0
+    scrollView.auk.settings.cornerRadius = 5.0
     scrollView.auk.settings.errorImage = UIImage(named: "error_image.png")
     
     // Preload the next and previous images
